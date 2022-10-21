@@ -8,12 +8,12 @@ blue = (0, 0, 255)
 green = (0, 255, 0)
 yellow = (255, 255, 102)
 
-dis_width = 1200
-dis_height = 1200
+dis_width = 800
+dis_height = 800
 
 clock = pygame.time.Clock()
 
-dis = pygame.display.set_mode((dis_width, dis_height))
+dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 
 game_over = False
@@ -23,15 +23,15 @@ def circle():
     pygame.display.update()
 
 def ex():
-    pygame.draw.line(dis, black, pos, (560, 560), 20)
+    pygame.draw.line(dis, black, pos, (0, 0), 10)
     pygame.display.update()
 
 while not game_over:
     dis.fill(white)
-    pygame.draw.rect(dis, black, [400, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [800, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [0, 400, dis_width, 10])
-    pygame.draw.rect(dis, black, [0, 800, dis_width, 10])
+    pygame.draw.rect(dis, black, [dis_width/3, 0, 10, dis_height])
+    pygame.draw.rect(dis, black, [dis_width*2/3, 0, 10, dis_height])
+    pygame.draw.rect(dis, black, [0, dis_height/3, dis_width, 10])
+    pygame.draw.rect(dis, black, [0, dis_height*2/3, dis_width, 10])
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
