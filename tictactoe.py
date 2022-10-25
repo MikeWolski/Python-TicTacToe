@@ -19,10 +19,6 @@ pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 
 game_over = False
 
-def circle(x, y):
-    pygame.draw.circle(dis, black, [dis_width*x, dis_height*y], dis_width/6.5, 10)
-    pygame.display.update()
-
 areaa = pygame.Rect(dis_width*0, dis_height*0, dis_width/3, dis_height/3)
 areab = pygame.Rect(dis_width/3, dis_width*0, dis_width/3, dis_height/3)
 areac = pygame.Rect(dis_width*2/3, dis_width*0, dis_width/3, dis_height/3)
@@ -33,18 +29,23 @@ areag = pygame.Rect(dis_width*0, dis_height*2/3, dis_width/3, dis_height/3)
 areah = pygame.Rect(dis_width/3, dis_height*2/3, dis_width/3, dis_height/3)
 areai = pygame.Rect(dis_width*2/3, dis_height*2/3, dis_width/3, dis_height/3)
 
+def circle(x, y):
+    pygame.draw.circle(dis, black, [dis_width*x, dis_height*y], dis_width/6.5, 10)
+    pygame.display.update()
+
 def square(x, y, a, b):
     pygame.draw.line(dis, black, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 10)
     pygame.draw.line(dis, black, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
     pygame.display.update()
 
+dis.fill(white)
+pygame.draw.rect(dis, black, [(dis_width/3)-5, 0, 10, dis_height])
+pygame.draw.rect(dis, black, [(dis_width*2/3)-5, 0, 10, dis_height])
+pygame.draw.rect(dis, black, [0, (dis_height/3)-5, dis_width, 10])
+pygame.draw.rect(dis, black, [0, (dis_height*2/3)-5, dis_width, 10])
+pygame.display.update()
+
 while not game_over:
-    dis.fill(white)
-    pygame.draw.rect(dis, black, [(dis_width/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [(dis_width*2/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [0, (dis_height/3)-5, dis_width, 10])
-    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-5, dis_width, 10])
-    pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
