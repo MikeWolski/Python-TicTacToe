@@ -34,42 +34,40 @@ areah = pygame.Rect(dis_width/3, dis_height*2/3, dis_width/3, dis_height/3)
 areai = pygame.Rect(dis_width*2/3, dis_height*2/3, dis_width/3, dis_height/3)
 
 def squarea():
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*0], [dis_width/3, dis_height/3], 10)
-    pygame.draw.line(dis, black, [dis_width*0, dis_height/3], [dis_width/3, dis_height*0], 10)
-    #pygame.draw.rect(dis, black, [dis_width*1/6, dis_height*0, 10, dis_height*1/3])
-    #pygame.draw.rect(dis, black, [dis_width*0, dis_height*1/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*0], [dis_width*1/3, dis_height*1/3], 10)
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*1/3], [dis_width*1/3, dis_height*0], 10)
     pygame.display.update()
 def squareb():
-    pygame.draw.rect(dis, black, [dis_width*1/2, dis_height*0, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*1/3, dis_height*1/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*0], [dis_width*2/3, dis_height*1/3], 10)
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1/3], [dis_width*2/3, dis_height*0], 10)
     pygame.display.update()
 def squarec():
-    pygame.draw.rect(dis, black, [dis_width*5/6, dis_height*0, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*2/3, dis_height*1/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*0], [dis_width*1, dis_height*1/3], 10)
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1/3], [dis_width*1, dis_height*0], 10)
     pygame.display.update()
 def squared():
-    pygame.draw.rect(dis, black, [dis_width/6, dis_height/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*0, dis_height/2, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*1/3], [dis_width*1/3, dis_height*2/3], 10)
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*2/3], [dis_width*1/3, dis_height*1/3], 10)
     pygame.display.update()
 def squaree():
-    pygame.draw.rect(dis, black, [dis_width/2, dis_height/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width/3, dis_height/2, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1/3], [dis_width*2/3, dis_height*2/3], 10)
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*2/3], [dis_width*2/3, dis_height*1/3], 10)
     pygame.display.update()
 def squaref():
-    pygame.draw.rect(dis, black, [dis_width*5/6, dis_height*1/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*2/3, dis_height*1/2, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1/3], [dis_width*1, dis_height*2/3], 10)
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*2/3], [dis_width*1, dis_height*1/3], 10)
     pygame.display.update()
 def squareg():
-    pygame.draw.rect(dis, black, [dis_width*1/6, dis_height*2/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*0, dis_height*5/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*2/3], [dis_width*1/3, dis_height*1], 10)
+    pygame.draw.line(dis, black, [dis_width*0, dis_height*1], [dis_width*1/3, dis_height*2/3], 10)
     pygame.display.update()
 def squareh():
-    pygame.draw.rect(dis, black, [dis_width*1/2, dis_height*2/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*1/3, dis_height*5/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*2/3], [dis_width*2/3, dis_height*1], 10)
+    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1], [dis_width*2/3, dis_height*2/3], 10)
     pygame.display.update()
 def squarei():
-    pygame.draw.rect(dis, black, [dis_width*5/6, dis_height*2/3, 10, dis_height*1/3])
-    pygame.draw.rect(dis, black, [dis_width*2/3, dis_height*5/6, dis_width*1/3, 10])
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*2/3], [dis_width*1, dis_height*1], 10)
+    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1], [dis_width*1, dis_height*2/3], 10)
     pygame.display.update()
 
 
