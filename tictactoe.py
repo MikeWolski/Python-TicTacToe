@@ -1,4 +1,4 @@
-from tkinter.messagebox import askretrycancel
+
 import pygame
 import time
 
@@ -9,8 +9,8 @@ blue = (0, 0, 255)
 green = (0, 255, 0)
 yellow = (255, 255, 102)
 
-dis_width = 800
-dis_height = 800
+dis_width = 1600
+dis_height = 1600
 
 clock = pygame.time.Clock()
 
@@ -30,12 +30,12 @@ areah = pygame.Rect(dis_width/3, dis_height*2/3, dis_width/3, dis_height/3)
 areai = pygame.Rect(dis_width*2/3, dis_height*2/3, dis_width/3, dis_height/3)
 
 def circle(x, y):
-    pygame.draw.circle(dis, black, [dis_width*x, dis_height*y], dis_width/6.5, 10)
+    pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], dis_width/6.5, 10)
     pygame.display.update()
 
 def square(x, y, a, b):
-    pygame.draw.line(dis, black, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 10)
-    pygame.draw.line(dis, black, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 10)
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
     pygame.display.update()
 
 dis.fill(white)
