@@ -20,7 +20,7 @@ pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 game_over = False
 
 def circle():
-    pygame.draw.circle(dis, black, pos, 180, 20)
+    pygame.draw.circle(dis, black, pos, dis_width/6, 10)
     pygame.display.update()
 
 areaa = pygame.Rect(dis_width*0, dis_height*0, dis_width/3, dis_height/3)
@@ -119,6 +119,10 @@ while not game_over:
                     pos = pygame.mouse.get_pos()
                     print(str(pos))
                     squarei()
+            if event.button == 3:
+                pos = pygame.mouse.get_pos()
+                print(str(pos))
+                circle()
     clock.tick(1)
 
 pygame.quit()
