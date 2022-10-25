@@ -19,8 +19,8 @@ pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 
 game_over = False
 
-def circle():
-    pygame.draw.circle(dis, black, pos, dis_width/6, 10)
+def circle(x, y):
+    pygame.draw.circle(dis, black, [dis_width*x, dis_height*y], dis_width/6.5, 10)
     pygame.display.update()
 
 areaa = pygame.Rect(dis_width*0, dis_height*0, dis_width/3, dis_height/3)
@@ -33,50 +33,17 @@ areag = pygame.Rect(dis_width*0, dis_height*2/3, dis_width/3, dis_height/3)
 areah = pygame.Rect(dis_width/3, dis_height*2/3, dis_width/3, dis_height/3)
 areai = pygame.Rect(dis_width*2/3, dis_height*2/3, dis_width/3, dis_height/3)
 
-def squarea():
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*0], [dis_width*1/3, dis_height*1/3], 10)
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*1/3], [dis_width*1/3, dis_height*0], 10)
+def square(x, y, a, b):
+    pygame.draw.line(dis, black, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 10)
+    pygame.draw.line(dis, black, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
     pygame.display.update()
-def squareb():
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*0], [dis_width*2/3, dis_height*1/3], 10)
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1/3], [dis_width*2/3, dis_height*0], 10)
-    pygame.display.update()
-def squarec():
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*0], [dis_width*1, dis_height*1/3], 10)
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1/3], [dis_width*1, dis_height*0], 10)
-    pygame.display.update()
-def squared():
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*1/3], [dis_width*1/3, dis_height*2/3], 10)
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*2/3], [dis_width*1/3, dis_height*1/3], 10)
-    pygame.display.update()
-def squaree():
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1/3], [dis_width*2/3, dis_height*2/3], 10)
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*2/3], [dis_width*2/3, dis_height*1/3], 10)
-    pygame.display.update()
-def squaref():
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1/3], [dis_width*1, dis_height*2/3], 10)
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*2/3], [dis_width*1, dis_height*1/3], 10)
-    pygame.display.update()
-def squareg():
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*2/3], [dis_width*1/3, dis_height*1], 10)
-    pygame.draw.line(dis, black, [dis_width*0, dis_height*1], [dis_width*1/3, dis_height*2/3], 10)
-    pygame.display.update()
-def squareh():
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*2/3], [dis_width*2/3, dis_height*1], 10)
-    pygame.draw.line(dis, black, [dis_width*1/3, dis_height*1], [dis_width*2/3, dis_height*2/3], 10)
-    pygame.display.update()
-def squarei():
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*2/3], [dis_width*1, dis_height*1], 10)
-    pygame.draw.line(dis, black, [dis_width*2/3, dis_height*1], [dis_width*1, dis_height*2/3], 10)
-    pygame.display.update()
-
 
 while not game_over:
     dis.fill(white)
-    pygame.draw.rect(dis, black, [dis_width/3, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [dis_width*2/3, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [0, dis_height/3, dis_width, 10])
-    pygame.draw.rect(dis, black, [0, dis_height*2/3, dis_width, 10])
+    pygame.draw.rect(dis, black, [(dis_width/3)-5, 0, 10, dis_height])
+    pygame.draw.rect(dis, black, [(dis_width*2/3)-5, 0, 10, dis_height])
+    pygame.draw.rect(dis, black, [0, (dis_height/3)-5, dis_width, 10])
+    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-5, dis_width, 10])
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -84,45 +51,42 @@ while not game_over:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 if areaa.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squarea()
+                    square(0, 1/3, 0, 1/3)
                 elif areab.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squareb()
+                    square(1/3, 2/3, 0, 1/3)
                 elif areac.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squarec()
+                    square(2/3, 1, 0, 1/3)
                 elif aread.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squared()
+                    square(0, 1/3, 1/3, 2/3)
                 elif areae.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squaree()
+                    square(1/3, 2/3, 1/3, 2/3)
                 elif areaf.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squaref()
+                    square(2/3, 1, 1/3, 2/3)
                 elif areag.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squareg()
+                    square(0, 1/3, 2/3, 1)
                 elif areah.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squareh()
+                    square(1/3, 2/3, 2/3, 1)
                 elif areai.collidepoint(event.pos):
-                    pos = pygame.mouse.get_pos()
-                    print(str(pos))
-                    squarei()
+                    square(2/3, 1, 2/3, 1)
             if event.button == 3:
-                pos = pygame.mouse.get_pos()
-                print(str(pos))
-                circle()
+                if areaa.collidepoint(event.pos):
+                    circle(1/6, 1/6)
+                elif areab.collidepoint(event.pos):
+                    circle(1/2, 1/6)
+                elif areac.collidepoint(event.pos):
+                    circle(5/6, 1/6)
+                elif aread.collidepoint(event.pos):
+                    circle(1/6, 1/2)
+                elif areae.collidepoint(event.pos):
+                    circle(1/2, 1/2)
+                elif areaf.collidepoint(event.pos):
+                    circle(5/6, 1/2)
+                elif areag.collidepoint(event.pos):
+                    circle(1/6, 5/6)
+                elif areah.collidepoint(event.pos):
+                    circle(1/2, 5/6)
+                elif areai.collidepoint(event.pos):
+                    circle(5/6, 5/6)
     clock.tick(1)
 
 pygame.quit()
