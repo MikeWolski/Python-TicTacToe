@@ -47,7 +47,7 @@ def square(x, y, a, b):
     pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
     pygame.display.update()
 
-turn = 0
+turn = 1
 
 while not game_over:
     for event in pygame.event.get():
