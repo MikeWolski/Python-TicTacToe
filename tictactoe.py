@@ -13,11 +13,12 @@ yellow = (255, 255, 102)
 
 dis_width = 800
 dis_height = 800
+so = (dis_width + dis_height)/80
 clock = pygame.time.Clock()
 dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 dis.fill(gray)
-font_style = pygame.font.SysFont("bahnschrift", int(dis_width/9.5))
+font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
 game_over = False
 
 rad = dis_width
@@ -40,10 +41,10 @@ ah = area(1/3,2/3,0)
 ai = area(2/3,2/3,0)
 
 def board():
-    pygame.draw.rect(dis, black, [(dis_width/3)-10, 0, 20, dis_height])
-    pygame.draw.rect(dis, black, [(dis_width*2/3)-10, 0, 20, dis_height])
-    pygame.draw.rect(dis, black, [0, (dis_height/3)-10, dis_width, 20])
-    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-10, dis_width, 20])
+    pygame.draw.rect(dis, black, [(dis_width/3)-(so/2), 0, so, dis_height])
+    pygame.draw.rect(dis, black, [(dis_width*2/3)-(so/2), 0, so, dis_height])
+    pygame.draw.rect(dis, black, [0, (dis_height/3)-(so/2), dis_width, so])
+    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-(so/2), dis_width, so])
     pygame.display.update()
 
 def message(msg,color):
@@ -55,12 +56,12 @@ def end(msg):
     pygame.display.update()
 
 def circle(x, y):
-    pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], rad/6.5, 20)
+    pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], rad/6.5, int(so))
     pygame.display.update()
 
 def ex(x, y, a, b):
-    pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 20)
-    pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 20)
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], int(so))
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], int(so))
     pygame.display.update()
 
 def win(x):
@@ -91,6 +92,26 @@ while not game_over:
         win(2)
         if event.type == pygame.QUIT:
             game_over = True
+        if event.type==pygame.VIDEORESIZE:
+            dis_height = dis.get_height()
+            dis_width = dis.get_width()
+            dis.fill(gray)
+            aa = area(0,0,0)
+            ab = area(1/3,0,0)
+            ac = area(2/3,0,0)
+            ad = area(0,1/3,0)
+            ae = area(1/3,1/3,0)
+            af = area(2/3,1/3,0)
+            ag = area(0,2/3,0)
+            ah = area(1/3,2/3,0)
+            ai = area(2/3,2/3,0)
+            so = (dis_width + dis_height)/80
+            font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+            rad = dis_width
+            if dis_width > dis_height:
+                rad = dis_height
+            board()
+            pygame.display.update()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 if turn%2 != 0:
@@ -153,46 +174,55 @@ while not game_over:
                         if aa.taken == 0:
                             turn += 1
                             circle(1/6, 1/6)
+                            board()
                             aa.taken = 2
                     elif ab.rect.collidepoint(event.pos):
                         if ab.taken == 0:
                             turn += 1
                             circle(1/2, 1/6)
+                            board()
                             ab.taken = 2
                     elif ac.rect.collidepoint(event.pos):
                         if ac.taken == 0:
                             turn += 1
                             circle(5/6, 1/6)
+                            board()
                             ac.taken = 2
                     elif ad.rect.collidepoint(event.pos):
                         if ad.taken == 0:
                             turn += 1
                             circle(1/6, 1/2)
+                            board()
                             ad.taken = 2
                     elif ae.rect.collidepoint(event.pos):
                         if ae.taken == 0:
                             turn += 1
                             circle(1/2, 1/2)
+                            board()
                             ae.taken = 2
                     elif af.rect.collidepoint(event.pos):
                         if af.taken == 0:
                             turn += 1
                             circle(5/6, 1/2)
+                            board()
                             af.taken = 2
                     elif ag.rect.collidepoint(event.pos):
                         if ag.taken == 0:
                             turn += 1
                             circle(1/6, 5/6)
+                            board()
                             ag.taken = 2
                     elif ah.rect.collidepoint(event.pos):
                         if ah.taken == 0:
                             turn += 1
                             circle(1/2, 5/6)
+                            board()
                             ah.taken = 2
                     elif ai.rect.collidepoint(event.pos):
                         if ai.taken == 0:
                             turn += 1
                             circle(5/6, 5/6)
+                            board()
                             ai.taken = 2
     clock.tick(60)
 pygame.quit()
