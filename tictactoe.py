@@ -6,7 +6,7 @@ pygame.init()
 white = (255, 255, 255)
 red = (255, 0, 0)
 black = (0, 0, 0)
-gray = (20, 20, 20)
+gray = (60, 60, 60)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 yellow = (255, 255, 102)
@@ -40,15 +40,15 @@ ah = area(1/3,2/3,0)
 ai = area(2/3,2/3,0)
 
 def board():
-    pygame.draw.rect(dis, white, [(dis_width/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, white, [(dis_width*2/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, white, [0, (dis_height/3)-5, dis_width, 10])
-    pygame.draw.rect(dis, white, [0, (dis_height*2/3)-5, dis_width, 10])
+    pygame.draw.rect(dis, black, [(dis_width/3)-10, 0, 20, dis_height])
+    pygame.draw.rect(dis, black, [(dis_width*2/3)-10, 0, 20, dis_height])
+    pygame.draw.rect(dis, black, [0, (dis_height/3)-10, dis_width, 20])
+    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-10, dis_width, 20])
     pygame.display.update()
 
 def message(msg,color):
     mesg = font_style.render(msg, True, color)
-    dis.blit(mesg, [dis_width/99, dis_height/2.1])
+    dis.blit(mesg, [dis_width/99, dis_height/2.15])
 
 def end(msg):
     message(msg, green)
@@ -71,17 +71,17 @@ while not game_over:
         if event.type == pygame.QUIT:
             game_over = True
         if (aa.taken == 1 and ab.taken == 1 and ac.taken == 1) or (ad.taken == 1 and ae.taken == 1 and af.taken == 1) or (ag.taken == 1 and ah.taken == 1 and ai.taken == 1) or (aa.taken == 1 and ad.taken == 1 and ag.taken == 1) or (ab.taken == 1 and ae.taken == 1 and ah.taken == 1) or (ac.taken == 1 and af.taken == 1 and ai.taken == 1) or (aa.taken == 1 and ae.taken == 1 and ai.taken == 1) or (ac.taken == 1 and ae.taken == 1 and ag.taken == 1):
-            time.sleep(1)
+            time.sleep(0.5)
             end("X's win! Thanks for playing!")
             time.sleep(3)
             game_over = True
         elif aa.taken > 0 and ab.taken > 0 and ac.taken > 0 and ad.taken > 0 and ae.taken > 0 and af.taken > 0 and ag.taken > 0 and ah.taken > 0 and ai.taken > 0:
-            time.sleep(1)
+            time.sleep(0.5)
             end("It's a tie! Thanks for playing!")
             time.sleep(3)
             game_over = True
         if (aa.taken == 2 and ab.taken == 2 and ac.taken == 2) or (ad.taken == 2 and ae.taken == 2 and af.taken == 2) or (ag.taken == 2 and ah.taken == 2 and ai.taken == 2) or (aa.taken == 2 and ad.taken == 2 and ag.taken == 2) or (ab.taken == 2 and ae.taken == 2 and ah.taken == 2) or (ac.taken == 2 and af.taken == 2 and ai.taken == 2) or (aa.taken == 2 and ae.taken == 2 and ai.taken == 2) or (ac.taken == 2 and ae.taken == 2 and ag.taken == 2):
-            time.sleep(1)
+            time.sleep(0.5)
             end("O's win! Thanks for playing!")
             time.sleep(3)
             game_over = True
