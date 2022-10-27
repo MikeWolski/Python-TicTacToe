@@ -1,18 +1,23 @@
 import pygame
+import time
+
+pygame.init()
 
 white = (255, 255, 255)
 red = (255, 0, 0)
 black = (0, 0, 0)
+gray = (20, 20, 20)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 yellow = (255, 255, 102)
 
-dis_width = 800
-dis_height = 800
+dis_width = 1200
+dis_height = 1200
 clock = pygame.time.Clock()
 dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
-dis.fill(white)
+dis.fill(gray)
+font_style = pygame.font.SysFont("bahnschrift", int(dis_width/9.5))
 game_over = False
 
 rad = dis_width
@@ -24,30 +29,38 @@ class area():
         self.rect = pygame.Rect(dis_width*x, dis_height*y, dis_width*1/3, dis_height*1/3)
         self.taken = taken
 
-areaa = area(0,0,0)
-areab = area(1/3,0,0)
-areac = area(2/3,0,0)
-aread = area(0,1/3,0)
-areae = area(1/3,1/3,0)
-areaf = area(2/3,1/3,0)
-areag = area(0,2/3,0)
-areah = area(1/3,2/3,0)
-areai = area(2/3,2/3,0)
+aa = area(0,0,0)
+ab = area(1/3,0,0)
+ac = area(2/3,0,0)
+ad = area(0,1/3,0)
+ae = area(1/3,1/3,0)
+af = area(2/3,1/3,0)
+ag = area(0,2/3,0)
+ah = area(1/3,2/3,0)
+ai = area(2/3,2/3,0)
 
 def board():
-    pygame.draw.rect(dis, black, [(dis_width/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [(dis_width*2/3)-5, 0, 10, dis_height])
-    pygame.draw.rect(dis, black, [0, (dis_height/3)-5, dis_width, 10])
-    pygame.draw.rect(dis, black, [0, (dis_height*2/3)-5, dis_width, 10])
+    pygame.draw.rect(dis, white, [(dis_width/3)-5, 0, 10, dis_height])
+    pygame.draw.rect(dis, white, [(dis_width*2/3)-5, 0, 10, dis_height])
+    pygame.draw.rect(dis, white, [0, (dis_height/3)-5, dis_width, 10])
+    pygame.draw.rect(dis, white, [0, (dis_height*2/3)-5, dis_width, 10])
+    pygame.display.update()
+
+def message(msg,color):
+    mesg = font_style.render(msg, True, color)
+    dis.blit(mesg, [dis_width/99, dis_height/2.1])
+
+def end(msg):
+    message(msg, green)
     pygame.display.update()
 
 def circle(x, y):
-    pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], rad/6.5, 10)
+    pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], rad/6.5, 20)
     pygame.display.update()
 
 def square(x, y, a, b):
-    pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 10)
-    pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 10)
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], 20)
+    pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], 20)
     pygame.display.update()
 
 turn = 1
@@ -57,109 +70,124 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
+        if (aa.taken == 1 and ab.taken == 1 and ac.taken == 1) or (ad.taken == 1 and ae.taken == 1 and af.taken == 1) or (ag.taken == 1 and ah.taken == 1 and ai.taken == 1) or (aa.taken == 1 and ad.taken == 1 and ag.taken == 1) or (ab.taken == 1 and ae.taken == 1 and ah.taken == 1) or (ac.taken == 1 and af.taken == 1 and ai.taken == 1) or (aa.taken == 1 and ae.taken == 1 and ai.taken == 1) or (ac.taken == 1 and ae.taken == 1 and ag.taken == 1):
+            time.sleep(1)
+            end("X's win! Thanks for playing!")
+            time.sleep(3)
+            game_over = True
+        elif aa.taken > 0 and ab.taken > 0 and ac.taken > 0 and ad.taken > 0 and ae.taken > 0 and af.taken > 0 and ag.taken > 0 and ah.taken > 0 and ai.taken > 0:
+            time.sleep(1)
+            end("It's a tie! Thanks for playing!")
+            time.sleep(3)
+            game_over = True
+        if (aa.taken == 2 and ab.taken == 2 and ac.taken == 2) or (ad.taken == 2 and ae.taken == 2 and af.taken == 2) or (ag.taken == 2 and ah.taken == 2 and ai.taken == 2) or (aa.taken == 2 and ad.taken == 2 and ag.taken == 2) or (ab.taken == 2 and ae.taken == 2 and ah.taken == 2) or (ac.taken == 2 and af.taken == 2 and ai.taken == 2) or (aa.taken == 2 and ae.taken == 2 and ai.taken == 2) or (ac.taken == 2 and ae.taken == 2 and ag.taken == 2):
+            time.sleep(1)
+            end("O's win! Thanks for playing!")
+            time.sleep(3)
+            game_over = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 if turn%2 != 0:
-                    if areaa.rect.collidepoint(event.pos):
-                        if areaa.taken == 0:
+                    if aa.rect.collidepoint(event.pos):
+                        if aa.taken == 0:
                             turn += 1
                             square(0, 1/3, 0, 1/3)
                             board()
-                            areaa.taken = 1
-                    elif areab.rect.collidepoint(event.pos):
-                        if areab.taken == 0:
+                            aa.taken = 1
+                    elif ab.rect.collidepoint(event.pos):
+                        if ab.taken == 0:
                             turn += 1
                             square(1/3, 2/3, 0, 1/3)
                             board()
-                            areab.taken = 1
-                    elif areac.rect.collidepoint(event.pos):
-                        if areac.taken == 0:
+                            ab.taken = 1
+                    elif ac.rect.collidepoint(event.pos):
+                        if ac.taken == 0:
                             turn += 1
                             square(2/3, 1, 0, 1/3)
                             board()
-                            areac.taken = 1
-                    elif aread.rect.collidepoint(event.pos):
-                        if aread.taken == 0:
+                            ac.taken = 1
+                    elif ad.rect.collidepoint(event.pos):
+                        if ad.taken == 0:
                             turn += 1
                             square(0, 1/3, 1/3, 2/3)
                             board()
-                            aread.taken = 1
-                    elif areae.rect.collidepoint(event.pos):
-                        if areae.taken == 0:
+                            ad.taken = 1
+                    elif ae.rect.collidepoint(event.pos):
+                        if ae.taken == 0:
                             turn += 1
                             square(1/3, 2/3, 1/3, 2/3)
                             board()
-                            areae.taken = 1
-                    elif areaf.rect.collidepoint(event.pos):
-                        if areaf.taken == 0:
+                            ae.taken = 1
+                    elif af.rect.collidepoint(event.pos):
+                        if af.taken == 0:
                             turn += 1
                             square(2/3, 1, 1/3, 2/3)
                             board()
-                            areaf.taken = 1
-                    elif areag.rect.collidepoint(event.pos):
-                        if areag.taken == 0:
+                            af.taken = 1
+                    elif ag.rect.collidepoint(event.pos):
+                        if ag.taken == 0:
                             turn += 1
                             square(0, 1/3, 2/3, 1)
                             board()
-                            areag.taken = 1
-                    elif areah.rect.collidepoint(event.pos):
-                        if areah.taken == 0:
+                            ag.taken = 1
+                    elif ah.rect.collidepoint(event.pos):
+                        if ah.taken == 0:
                             turn += 1
                             square(1/3, 2/3, 2/3, 1)
                             board()
-                            areah.taken = 1
-                    elif areai.rect.collidepoint(event.pos):
-                        if areai.taken == 0:
+                            ah.taken = 1
+                    elif ai.rect.collidepoint(event.pos):
+                        if ai.taken == 0:
                             turn += 1
                             square(2/3, 1, 2/3, 1)
                             board()
-                            areai.taken = 1
+                            ai.taken = 1
                 elif turn%2 == 0:
-                    if areaa.rect.collidepoint(event.pos):
-                        if areaa.taken == 0:
+                    if aa.rect.collidepoint(event.pos):
+                        if aa.taken == 0:
                             turn += 1
                             circle(1/6, 1/6)
-                            areaa.taken = 1
-                    elif areab.rect.collidepoint(event.pos):
-                        if areab.taken == 0:
+                            aa.taken = 2
+                    elif ab.rect.collidepoint(event.pos):
+                        if ab.taken == 0:
                             turn += 1
                             circle(1/2, 1/6)
-                            areab.taken = 1
-                    elif areac.rect.collidepoint(event.pos):
-                        if areac.taken == 0:
+                            ab.taken = 2
+                    elif ac.rect.collidepoint(event.pos):
+                        if ac.taken == 0:
                             turn += 1
                             circle(5/6, 1/6)
-                            areac.taken = 1
-                    elif aread.rect.collidepoint(event.pos):
-                        if aread.taken == 0:
+                            ac.taken = 2
+                    elif ad.rect.collidepoint(event.pos):
+                        if ad.taken == 0:
                             turn += 1
                             circle(1/6, 1/2)
-                            aread.taken = 1
-                    elif areae.rect.collidepoint(event.pos):
-                        if areae.taken == 0:
+                            ad.taken = 2
+                    elif ae.rect.collidepoint(event.pos):
+                        if ae.taken == 0:
                             turn += 1
                             circle(1/2, 1/2)
-                            areae.taken = 1
-                    elif areaf.rect.collidepoint(event.pos):
-                        if areaf.taken == 0:
+                            ae.taken = 2
+                    elif af.rect.collidepoint(event.pos):
+                        if af.taken == 0:
                             turn += 1
                             circle(5/6, 1/2)
-                            areaf.taken = 1
-                    elif areag.rect.collidepoint(event.pos):
-                        if areag.taken == 0:
+                            af.taken = 2
+                    elif ag.rect.collidepoint(event.pos):
+                        if ag.taken == 0:
                             turn += 1
                             circle(1/6, 5/6)
-                            areag.taken = 1
-                    elif areah.rect.collidepoint(event.pos):
-                        if areah.taken == 0:
+                            ag.taken = 2
+                    elif ah.rect.collidepoint(event.pos):
+                        if ah.taken == 0:
                             turn += 1
                             circle(1/2, 5/6)
-                            areah.taken = 1
-                    elif areai.rect.collidepoint(event.pos):
-                        if areai.taken == 0:
+                            ah.taken = 2
+                    elif ai.rect.collidepoint(event.pos):
+                        if ai.taken == 0:
                             turn += 1
                             circle(5/6, 5/6)
-                            areai.taken = 1
+                            ai.taken = 2
     clock.tick(30)
 pygame.quit()
 quit()
