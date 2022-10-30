@@ -23,11 +23,14 @@ def startscreen():
     font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
     dis.fill(gray)
     
-    def message(msg,color):
+    def message(msg,color, x, y):
         mesg = font_style.render(msg, True, color)
-        dis.blit(mesg, [dis_width/99, dis_height/2.15])
+        dis.blit(mesg, [x, y])
     while True:
-        message("Press Q to Quit or C to Play", red)
+        cc = blue
+        xc = red
+        message("TicTacToe", white, 0, 0)
+        message("Press Q to Quit or C to Play", red, dis_width/99, dis_height*0.9)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,7 +42,8 @@ def startscreen():
                 so = (dis_width + dis_height)/80
                 font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
                 dis.fill(gray)
-                message("Press Q to Quit or C to Play", red)
+                message("TicTacToe", white, 0, 0)
+                message("Press Q to Quit or C to Play", red, dis_width/99, dis_height*0.9)
                 so = (dis_width + dis_height)/80
                 pygame.display.update()
             if event.type == pygame.KEYDOWN:
@@ -47,16 +51,17 @@ def startscreen():
                     pygame.quit()
                     quit()
                 if event.key == pygame.K_c:
-                    gameloop()
+                    gameloop(cc, xc)
 
-def gameloop():
+def gameloop(cc, xc):
     dis_width = dis.get_width()
     dis_height = dis.get_height()
     so = (dis_width + dis_height)/80
     dis.fill(gray)
     font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
     game_over = False
-
+    xcolor = xc
+    ocolor = cc
     rad = dis_width
     if dis_width > dis_height:
         rad = dis_height
@@ -92,12 +97,12 @@ def gameloop():
         pygame.display.update()
 
     def circle(x, y):
-        pygame.draw.circle(dis, blue, [dis_width*x, dis_height*y], rad/6.5, int(so))
+        pygame.draw.circle(dis, ocolor, [dis_width*x, dis_height*y], rad/6.5, int(so))
         pygame.display.update()
 
     def ex(x, y, a, b):
-        pygame.draw.line(dis, red, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], int(so))
-        pygame.draw.line(dis, red, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], int(so))
+        pygame.draw.line(dis, xcolor, [dis_width*x, dis_height*a], [dis_width*y, dis_height*b], int(so))
+        pygame.draw.line(dis, xcolor, [dis_width*x, dis_height*b], [dis_width*y, dis_height*a], int(so))
         pygame.display.update()
 
     def win(x):
