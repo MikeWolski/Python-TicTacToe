@@ -14,12 +14,45 @@ dis_width = 1200
 dis_height = 1200
 dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
+clock = pygame.time.Clock()
+
+def startscreen():
+    dis_width = dis.get_width()
+    dis_height = dis.get_height()
+    so = (dis_width + dis_height)/80
+    font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+    dis.fill(gray)
+    
+    def message(msg,color):
+        mesg = font_style.render(msg, True, color)
+        dis.blit(mesg, [dis_width/99, dis_height/2.15])
+    while True:
+        message("Press Q to Quit or C to Play", red)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type==pygame.VIDEORESIZE:
+                dis_height = dis.get_height()
+                dis_width = dis.get_width()
+                so = (dis_width + dis_height)/80
+                font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+                dis.fill(gray)
+                message("Press Q to Quit or C to Play", red)
+                so = (dis_width + dis_height)/80
+                pygame.display.update()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    quit()
+                if event.key == pygame.K_c:
+                    gameloop()
 
 def gameloop():
     dis_width = dis.get_width()
     dis_height = dis.get_height()
     so = (dis_width + dis_height)/80
-    clock = pygame.time.Clock()
     dis.fill(gray)
     font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
     game_over = False
@@ -73,15 +106,15 @@ def gameloop():
             if x == 1:
                 end("X's win!")
                 time.sleep(3)
-                gameloop()
+                startscreen()
             elif x == 2:
                 end("O's win!")
                 time.sleep(3)
-                gameloop()
+                startscreen()
         elif aa.taken > 0 and ab.taken > 0 and ac.taken > 0 and ad.taken > 0 and ae.taken > 0 and af.taken > 0 and ag.taken > 0 and ah.taken > 0 and ai.taken > 0:
             end("It's a tie!")
             time.sleep(3)
-            gameloop()
+            startscreen()
 
     turn = 1
     board()
@@ -227,4 +260,5 @@ def gameloop():
         clock.tick(60)
     pygame.quit()
     quit()
-gameloop()
+
+startscreen()
