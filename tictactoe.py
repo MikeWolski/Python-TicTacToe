@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui
 import time
 
 pygame.init()
@@ -10,27 +11,62 @@ gray = (60, 60, 60)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 yellow = (255, 255, 102)
-dis_width = 1200
-dis_height = 1200
+purple = (255, 0, 255)
+orange = (200, 69, 25)
+dis_width = 800
+dis_height = 800
 dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 clock = pygame.time.Clock()
+
+manager = pygame_gui.UIManager((dis_width, dis_height))
 
 def startscreen():
     dis_width = dis.get_width()
     dis_height = dis.get_height()
     so = (dis_width + dis_height)/80
-    font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+    font_style = pygame.font.SysFont("bahnschrift", int(so*2))
     dis.fill(gray)
+    rad = dis_width
+    if dis_width > dis_height:
+        rad = dis_height
     
     def message(msg,color, x, y):
         mesg = font_style.render(msg, True, color)
         dis.blit(mesg, [x, y])
+
+    def circle(color):
+        pygame.draw.circle(dis, color, [dis_width*3/4, dis_height*1/3], rad/8, int(so))
+        pygame.display.update()
+
+    def ex(color):
+        pygame.draw.line(dis, color, [dis_width*0, dis_height*0], [dis_width*1/3, dis_height*1/3], int(so))
+        pygame.draw.line(dis, color, [dis_width*0, dis_height*1/3], [dis_width*1/3, dis_height*0], int(so))
+        pygame.display.update()
+
+    ex(red)
+    red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2), (100, 50)), text="Red", manager=manager)
+    green_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2+60), (100, 50)), text="Green", manager=manager)
+    blue_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2+120), (100, 50)), text="Blue", manager=manager)
+    yellow_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2+180), (100, 50)), text="Yellow", manager=manager)
+    purple_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2+240), (100, 50)), text="Purple", manager=manager)
+    orange_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-50, dis_height*1/2+300), (100, 50)), text="Orange", manager=manager)
+
+    circle(blue)
+    red_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2), (100, 50)), text="Red", manager=manager)
+    green_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+60), (100, 50)), text="Green", manager=manager)
+    blue_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+120), (100, 50)), text="Blue", manager=manager)
+    yellow_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+180), (100, 50)), text="Yellow", manager=manager)
+    purple_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+240), (100, 50)), text="Purple", manager=manager)
+    orange_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+300), (100, 50)), text="Orange", manager=manager)
+
     while True:
-        cc = blue
-        xc = red
+        time_delta = clock.tick(60)/1000.0
         message("TicTacToe", white, 0, 0)
-        message("Press Q to Quit or C to Play", red, dis_width/99, dis_height*0.9)
+        message("Press Q to Quit or C to Play", red, 0, dis_height*1/9)
+        manager.draw_ui(dis)
+        xc = red
+        cc = blue
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,12 +75,31 @@ def startscreen():
             if event.type==pygame.VIDEORESIZE:
                 dis_height = dis.get_height()
                 dis_width = dis.get_width()
+                rad = dis_width
+                if dis_width > dis_height:
+                    rad = dis_height
                 so = (dis_width + dis_height)/80
                 font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
                 dis.fill(gray)
+                manager.clear_and_reset()
                 message("TicTacToe", white, 0, 0)
-                message("Press Q to Quit or C to Play", red, dis_width/99, dis_height*0.9)
+                message("Press Q to Quit or C to Play", red, 0, dis_height*1/9)
                 so = (dis_width + dis_height)/80
+                ex()
+                red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2), (100, 50)), text="Red", manager=manager)
+                green_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2+60), (100, 50)), text="Green", manager=manager)
+                blue_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2+120), (100, 50)), text="Blue", manager=manager)
+                yellow_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2+180), (100, 50)), text="Yellow", manager=manager)
+                purple_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2+240), (100, 50)), text="Purple", manager=manager)
+                orange_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4, dis_height*1/2+300), (100, 50)), text="Orange", manager=manager)
+
+                circle()
+                red_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2), (100, 50)), text="Red", manager=manager)
+                green_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+60), (100, 50)), text="Green", manager=manager)
+                blue_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+120), (100, 50)), text="Blue", manager=manager)
+                yellow_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+180), (100, 50)), text="Yellow", manager=manager)
+                purple_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+240), (100, 50)), text="Purple", manager=manager)
+                orange_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-50, dis_height*1/2+300), (100, 50)), text="Orange", manager=manager)
                 pygame.display.update()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
@@ -52,7 +107,58 @@ def startscreen():
                     quit()
                 if event.key == pygame.K_c:
                     gameloop(cc, xc)
-
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == red_button:
+                    xc = red
+                    ex(red)
+                    pygame.display.update()
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == green_button:
+                    xc = green
+                    ex(green)
+                    pygame.display.update()
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == blue_button:
+                    xc = blue
+                    ex(blue)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == yellow_button:
+                    xc = yellow
+                    ex(yellow)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == purple_button:
+                    xc = purple
+                    ex(purple)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == orange_button:
+                    xc = orange
+                    ex(orange)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == red_buttono:
+                    cc = red
+                    circle(red)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == green_buttono:
+                    cc = green
+                    circle(green)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == blue_buttono:
+                    cc = blue
+                    circle(blue)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == yellow_buttono:
+                    cc = yellow
+                    circle(yellow)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == purple_buttono:
+                    cc = purple
+                    circle(purple)
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == orange_buttono:
+                    cc = orange
+                    circle(orange)
+            manager.process_events(event)
+        manager.update(time_delta)
 def gameloop(cc, xc):
     dis_width = dis.get_width()
     dis_height = dis.get_height()
