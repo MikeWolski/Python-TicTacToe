@@ -40,11 +40,11 @@ def startscreen(xc, cc):
 
     def message(msg,color, x, y):
         mesg = font_style.render(msg, True, color)
-        dis.blit(mesg, [x, y])
+        dis.blit(mesg, [(dis_width-mesg.get_rect().width)/2, y])
     
-    def title(msg,color, x, y):
+    def title(msg,color, y):
         mesg = title_font.render(msg, True, color)
-        dis.blit(mesg, [x, y])
+        dis.blit(mesg, [(dis_width-mesg.get_rect().width)/2, y])
 
     def circle(color):
         pygame.draw.circle(dis, color, [dis_width*3/4, dis_height*1/3], rad/9, int(so))
@@ -75,7 +75,7 @@ def startscreen(xc, cc):
     
     while True:
         time_delta = clock.tick(60)/1000.0
-        title("TicTacToe", white, 0, 0)
+        title("TicTacToe", white, 0)
         message("Press C to Play", red, 0, dis_height*1/9)
         manager.draw_ui(dis)
         pygame.display.update()
@@ -95,7 +95,7 @@ def startscreen(xc, cc):
                 dis.fill(gray)
                 manager.clear_and_reset()
                 manager.set_window_resolution((dis_width, dis_height))
-                title("TicTacToe", white, 0, 0)
+                title("TicTacToe", white, 0)
                 message("Press C to Play", red, 0, dis_height*1/9)
                 so = (dis_width + dis_height)/80
                 ex(xc)
@@ -185,7 +185,7 @@ def gameloop(cc, xc):
     dis_height = dis.get_height()
     so = (dis_width + dis_height)/80
     dis.fill(gray)
-    font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+    font_style = pygame.font.SysFont("bahnschrift", int(so*8))
     game_over = False
     xcolor = xc
     ocolor = cc
@@ -217,7 +217,7 @@ def gameloop(cc, xc):
 
     def message(msg,color):
         mesg = font_style.render(msg, True, color)
-        dis.blit(mesg, [dis_width/99, dis_height/2.15])
+        dis.blit(mesg, [(dis_width-mesg.get_rect().width)/2, (dis_height-mesg.get_rect().height)/2])
 
     def end(msg):
         message(msg, green)
@@ -272,7 +272,7 @@ def gameloop(cc, xc):
                 ah = area(1/3,2/3,0)
                 ai = area(2/3,2/3,0)
                 so = (dis_width + dis_height)/80
-                font_style = pygame.font.SysFont("bahnschrift", int(so*3.5))
+                font_style = pygame.font.SysFont("bahnschrift", int(so*8))
                 rad = dis_width
                 if dis_width > dis_height:
                     rad = dis_height
