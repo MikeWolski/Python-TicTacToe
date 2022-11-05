@@ -14,8 +14,8 @@ yellow = (255,255,0)
 purple = (138,43,226)
 orange = (255,165,0)
 pink = (255,105,180)
-dis_width = 1200
-dis_height = 1200
+dis_width = 800
+dis_height = 800
 dis = pygame.display.set_mode((dis_width, dis_height), pygame.RESIZABLE)
 pygame.display.set_caption("Tic Tac Toe by Mike Wolski")
 clock = pygame.time.Clock()
@@ -55,6 +55,8 @@ def startscreen(xc, cc):
         pygame.draw.line(dis, color, [dis_width*1/6, dis_height*7/16], [dis_width*1/3, dis_height*1/4], int(so))
         pygame.display.update()
 
+    start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/2), (so*10, so*2)), text="Start", manager=manager)
+
     ex(xc)
     red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-so*5, dis_height*1/2), (so*10, so*2)), text="Red", manager=manager)
     green_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-so*5, dis_height*1/2+so*2), (so*10, so*2)), text="Green", manager=manager)
@@ -76,7 +78,6 @@ def startscreen(xc, cc):
     while True:
         time_delta = clock.tick(60)/1000.0
         title("TicTacToe", white, 0)
-        message("Press C to Play", red, 0, dis_height*1/9)
         manager.draw_ui(dis)
         pygame.display.update()
         for event in pygame.event.get():
@@ -96,7 +97,7 @@ def startscreen(xc, cc):
                 manager.clear_and_reset()
                 manager.set_window_resolution((dis_width, dis_height))
                 title("TicTacToe", white, 0)
-                message("Press C to Play", red, 0, dis_height*1/9)
+                start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/2), (so*10, so*2)), text="Start", manager=manager)
                 so = (dis_width + dis_height)/80
                 ex(xc)
                 red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-so*5, dis_height*1/2), (so*10, so*2)), text="Red", manager=manager)
@@ -117,8 +118,8 @@ def startscreen(xc, cc):
                 pink_buttono = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*3/4-so*5, dis_height*1/2+so*12), (so*10, so*2)), text="Pink", manager=manager)
 
                 pygame.display.update()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == start_button:
                     gameloop(cc, xc)
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == red_button:
