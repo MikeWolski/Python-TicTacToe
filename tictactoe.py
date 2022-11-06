@@ -55,7 +55,7 @@ def startscreen(xc, cc):
         pygame.draw.line(dis, color, [dis_width*1/6, dis_height*7/16], [dis_width*1/3, dis_height*1/4], int(so))
         pygame.display.update()
 
-    start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/2), (so*10, so*2)), text="Start", manager=manager)
+    start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/3), (so*10, so*2)), text="Start", manager=manager)
 
     ex(xc)
     red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-so*5, dis_height*1/2), (so*10, so*2)), text="Red", manager=manager)
@@ -97,7 +97,7 @@ def startscreen(xc, cc):
                 manager.clear_and_reset()
                 manager.set_window_resolution((dis_width, dis_height))
                 title("TicTacToe", white, 0)
-                start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/2), (so*10, so*2)), text="Start", manager=manager)
+                start_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/2-so*5, dis_height*1/3), (so*10, so*2)), text="Start", manager=manager)
                 so = (dis_width + dis_height)/80
                 ex(xc)
                 red_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((dis_width*1/4-so*5, dis_height*1/2), (so*10, so*2)), text="Red", manager=manager)
